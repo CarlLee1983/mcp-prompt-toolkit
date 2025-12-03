@@ -76,29 +76,48 @@ v0.4.0-rc.1
 
 ### Creating a Release
 
-1. **Update version in package.json** (if needed):
-   ```bash
-   # Edit package.json and update the version field
-   ```
+The release process supports two approaches:
 
-2. **Commit the version change**:
-   ```bash
-   git add package.json
-   git commit -m "chore: bump version to 0.3.2"
-   ```
+#### Approach 1: Automatic Version Sync (Recommended)
 
-3. **Create and push the tag**:
-   ```bash
-   git tag -a v0.3.2 -m "Release v0.3.2: Add release workflow automation"
-   git push origin main
-   git push origin v0.3.2
-   ```
+Simply create and push a version tag. The workflow will automatically update `package.json`:
 
-4. **GitHub Actions will automatically**:
-   - Build the project
-   - Run tests
-   - Create a GitHub Release
-   - Publish to npm (if NPM_TOKEN is configured)
+```bash
+# 1. Create and push the tag
+git tag -a v0.3.2 -m "Release v0.3.2: Description of changes"
+git push origin main
+git push origin v0.3.2
+```
+
+**GitHub Actions will automatically**:
+- Extract version from tag
+- Update `package.json` version to match the tag
+- Verify version consistency
+- Build the project
+- Run tests
+- Commit version update back to repository
+- Create a GitHub Release with release notes
+- Publish to npm (if NPM_TOKEN is configured)
+
+#### Approach 2: Manual Version Update (Optional)
+
+If you prefer to update `package.json` before creating the tag:
+
+```bash
+# 1. Update version in package.json manually
+# Edit package.json and set version to "0.3.2"
+
+# 2. Commit the version change
+git add package.json
+git commit -m "chore: bump version to 0.3.2"
+git push origin main
+
+# 3. Create and push the tag (version should match package.json)
+git tag -a v0.3.2 -m "Release v0.3.2: Description of changes"
+git push origin v0.3.2
+```
+
+**Note**: If `package.json` version doesn't match the tag, the workflow will automatically update it and verify consistency before publishing.
 
 ## Release Notes
 

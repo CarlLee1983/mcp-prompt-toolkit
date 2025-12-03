@@ -1,6 +1,6 @@
 {
   "name": "@carllee1983/prompt-toolkit",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Prompt repository governance toolkit for MCP",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -31,6 +31,7 @@
   ],
   "author": "CarlLee1983",
   "license": "ISC",
+  "packageManager": "pnpm@9.0.0",
   "devDependencies": {
     "@eslint/js": "^9.39.1",
     "@types/node": "^20.0.0",
