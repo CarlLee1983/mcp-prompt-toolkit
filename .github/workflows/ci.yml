@@ -13,24 +13,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ 拉原始碼
+      # 1️⃣ Checkout repository
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2️⃣ 設定 Node.js（你套件需求 Node 18+）
+      # 2️⃣ Install pnpm (must be before Node.js setup)
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9
+
+      # 3️⃣ Setup Node.js (requires Node 18+)
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'pnpm'
 
-      # 3️⃣ 安裝 pnpm
-      - name: Install pnpm
-        uses: pnpm/action-setup@v3
-        with:
-          version: 9
-
-      # 4️⃣ 安裝依賴
+      # 4️⃣ Install dependencies
       - name: Install dependencies
         run: pnpm install
 
@@ -38,10 +38,10 @@ jobs:
       - name: Lint
         run: pnpm lint
 
-      # 6️⃣ 單元測試（你現在有 82 tests）
+      # 6️⃣ Run unit tests
       - name: Test
         run: pnpm test:run
 
-      # 7️⃣ Build（ts → dist）
+      # 7️⃣ Build (TypeScript → dist)
       - name: Build
         run: pnpm build
