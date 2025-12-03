@@ -4,7 +4,7 @@
 
 **適用於 MCP 的提示倉庫治理工具集**
 
-[![Version](https://img.shields.io/badge/version-0.3.1-blue.svg)](https://github.com/CarlLee1983/prompts-tooling-sdk)
+[![Version](https://img.shields.io/badge/version-0.4.1-blue.svg)](https://github.com/CarlLee1983/prompts-tooling-sdk)
 [![License](https://img.shields.io/badge/license-ISC-green.svg)](LICENSE)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.4+-blue.svg)](https://www.typescriptlang.org/)
 [![Node](https://img.shields.io/badge/Node.js-18+-green.svg)](https://nodejs.org/)
@@ -288,9 +288,36 @@ pnpm test
 # 單次執行測試
 pnpm test:run
 
-# 產生覆蓋率報告
+# 產生覆蓋率報告（本地開發）
 pnpm test:coverage
+
+# 產生覆蓋率報告並檢查門檻（CI 模式）
+pnpm test:coverage:ci
+
+# 產生覆蓋率報告並開啟 HTML 報告
+pnpm test:coverage:view
 ```
+
+### 測試覆蓋率
+
+本專案透過完善的測試覆蓋率維持高程式碼品質，設有以下門檻：
+
+- **語句覆蓋率**：≥ 80%
+- **行覆蓋率**：≥ 75%
+- **函數覆蓋率**：≥ 75%
+- **分支覆蓋率**：≥ 70%
+
+#### 查看覆蓋率報告
+
+1. **本地開發**：執行 `pnpm test:coverage:view` 會產生並自動在瀏覽器中開啟 HTML 覆蓋率報告。
+
+2. **CI/CD**：覆蓋率報告會在 CI 中自動產生並上傳為 artifacts。您可以從 GitHub Actions 工作流程執行中下載：
+   - 前往儲存庫的 Actions 標籤
+   - 選擇一個工作流程執行
+   - 下載 `coverage-reports` artifact
+   - 解壓縮並在瀏覽器中開啟 `coverage/index.html`
+
+3. **覆蓋率門檻**：如果未達到覆蓋率門檻，CI 流程會失敗，確保在合併或發布前維持程式碼品質標準。
 
 ## 🛠️ 開發
 

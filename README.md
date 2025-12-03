@@ -4,7 +4,7 @@
 
 **Prompt repository governance toolkit for MCP**
 
-[![Version](https://img.shields.io/badge/version-0.4.0-blue.svg)](https://github.com/CarlLee1983/prompts-tooling-sdk)
+[![Version](https://img.shields.io/badge/version-0.4.1-blue.svg)](https://github.com/CarlLee1983/prompts-tooling-sdk)
 [![License](https://img.shields.io/badge/license-ISC-green.svg)](LICENSE)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.4+-blue.svg)](https://www.typescriptlang.org/)
 [![Node](https://img.shields.io/badge/Node.js-18+-green.svg)](https://nodejs.org/)
@@ -387,9 +387,36 @@ pnpm test
 # Run tests once
 pnpm test:run
 
-# Generate coverage report
+# Generate coverage report (local development)
 pnpm test:coverage
+
+# Generate coverage report with thresholds (CI mode)
+pnpm test:coverage:ci
+
+# Generate coverage report and open HTML report
+pnpm test:coverage:view
 ```
+
+### Test Coverage
+
+This project maintains high code quality through comprehensive test coverage with the following thresholds:
+
+- **Statements**: ≥ 80%
+- **Lines**: ≥ 75%
+- **Functions**: ≥ 75%
+- **Branches**: ≥ 70%
+
+#### Viewing Coverage Reports
+
+1. **Local Development**: Run `pnpm test:coverage:view` to generate and automatically open the HTML coverage report in your browser.
+
+2. **CI/CD**: Coverage reports are automatically generated in CI and uploaded as artifacts. You can download them from the GitHub Actions workflow run:
+   - Go to the Actions tab in your repository
+   - Select a workflow run
+   - Download the `coverage-reports` artifact
+   - Extract and open `coverage/index.html` in your browser
+
+3. **Coverage Thresholds**: The CI pipeline will fail if coverage thresholds are not met, ensuring code quality standards are maintained before merging or releasing.
 
 ## 🛠️ Development
 

@@ -43,6 +43,20 @@ jobs:
       - name: Test
         run: pnpm test:run
 
-      # 7️⃣ Build (TypeScript → dist)
+      # 7️⃣ Run coverage tests with thresholds
+      - name: Test Coverage
+        run: pnpm test:coverage:ci
+
+      # 8️⃣ Upload coverage reports
+      - name: Upload coverage reports
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: coverage-reports
+          path: |
+            coverage/
+          retention-days: 30
+
+      # 9️⃣ Build (TypeScript → dist)
       - name: Build
         run: pnpm build

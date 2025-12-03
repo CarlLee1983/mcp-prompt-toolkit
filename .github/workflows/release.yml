@@ -48,7 +48,11 @@ jobs:
       - name: Test
         run: pnpm test:run
 
-      # 7️⃣ Extract version from tag
+      # 7️⃣ Run coverage tests with thresholds (required before release)
+      - name: Test Coverage
+        run: pnpm test:coverage:ci
+
+      # 8️⃣ Extract version from tag
       - name: Extract version from tag
         id: version
         run: |
@@ -57,7 +61,7 @@ jobs:
           echo "Released version: $VERSION"
           echo "Note: Version is managed by npm version command, ensuring package.json, commit, and tag are always in sync"
 
-      # 8️⃣ Verify version consistency
+      # 9️⃣ Verify version consistency
       - name: Verify version consistency
         run: |
           VERSION="${{ steps.version.outputs.version }}"
@@ -71,7 +75,7 @@ jobs:
           fi
           echo "✅ Version consistency verified (package.json, commit, and tag are in sync)"
 
-      # 9️⃣ Create GitHub Release
+      # 🔟 Create GitHub Release
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
@@ -85,7 +89,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # 🔟 Publish to npm
+      # 1️⃣1️⃣ Publish to npm
       - name: Publish to npm
         if: contains(github.ref, 'refs/tags/v')
         run: pnpm publish --no-git-checks
