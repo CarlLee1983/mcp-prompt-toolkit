@@ -15,7 +15,7 @@ jobs:
     steps:
       # 1️⃣ Checkout repository
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       # 2️⃣ Install pnpm (must be before Node.js setup)
       - name: Install pnpm
