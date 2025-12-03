@@ -94,7 +94,7 @@ export function validatePromptRepo(
     ? path.join(repoRoot, registry.data.partials.path)
     : null
 
-  for (const [groupName, group] of Object.entries(registry.data.groups)) {
+  for (const [_groupName, group] of Object.entries(registry.data.groups)) {
     if (!group.enabled) continue
 
     for (const file of group.prompts) {

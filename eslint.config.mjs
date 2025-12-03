@@ -42,7 +42,8 @@ export default tseslint.config(
       '*.config.js',
       '*.config.mjs',
       'coverage/**',
-      '.vitest/**'
+      '.vitest/**',
+      'examples/**'
     ]
   }
 )

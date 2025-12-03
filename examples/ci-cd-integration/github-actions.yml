@@ -1,0 +1,50 @@
+name: Validate Prompts
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+      
+      - name: Install prompt-toolkit
+        run: npm install -g @carllee1983/prompt-toolkit
+      
+      - name: Validate registry
+        run: prompt-toolkit validate registry --exit-code
+      
+      - name: Validate all prompt files
+        run: prompt-toolkit validate repo --exit-code --severity error
+      
+      - name: Check partials usage
+        run: prompt-toolkit check partials --exit-code
+      
+      - name: Save validation results
+        if: always()
+        run: |
+          prompt-toolkit validate repo --format json --output validation-results.json
+          prompt-toolkit stats --format json --output stats.json
+      
+      - name: Upload validation results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: validation-results
+          path: |
+            validation-results.json
+            stats.json
+          retention-days: 30
+

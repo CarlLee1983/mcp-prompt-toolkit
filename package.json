@@ -30,7 +30,13 @@
     "prompt",
     "toolkit",
     "ai",
-    "governance"
+    "governance",
+    "validation",
+    "yaml",
+    "schema",
+    "cli",
+    "typescript",
+    "model-context-protocol"
   ],
   "author": "CarlLee1983",
   "license": "ISC",
@@ -43,6 +49,9 @@
   },
   "homepage": "https://github.com/CarlLee1983/mcp-prompt-toolkit#readme",
   "packageManager": "pnpm@9.0.0",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
     "@types/node": "^20.0.0",

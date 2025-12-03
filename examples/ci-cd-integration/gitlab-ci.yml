@@ -1,0 +1,31 @@
+# GitLab CI Pipeline for Prompt Validation
+
+stages:
+  - validate
+
+validate-prompts:
+  stage: validate
+  image: node:20
+  cache:
+    paths:
+      - node_modules/
+  before_script:
+    - npm install -g @carllee1983/prompt-toolkit
+  script:
+    - echo "Validating prompt repository..."
+    - prompt-toolkit validate registry --exit-code
+    - prompt-toolkit validate repo --exit-code --severity error
+    - prompt-toolkit check partials --exit-code
+    - echo "✅ All validations passed!"
+  artifacts:
+    when: always
+    paths:
+      - validation-results.json
+      - stats.json
+    reports:
+      junit: validation-results.json
+  only:
+    - main
+    - develop
+    - merge_requests
+

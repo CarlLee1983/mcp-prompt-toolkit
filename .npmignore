@@ -1,0 +1,46 @@
+# Source files
+src/
+test/
+*.ts
+!*.d.ts
+
+# Configuration files
+tsconfig.json
+vitest.config.ts
+eslint.config.mjs
+.prettierrc*
+.editorconfig
+
+# Development files
+.github/
+.husky/
+node_modules/
+.pnpm-debug.log*
+
+# Documentation (keep README.md)
+*.md
+!README.md
+
+# Development scripts
+scripts/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Build artifacts (keep dist/)
+*.map
+!dist/**/*.map
+
+# Temporary files
+*.log
+*.tmp
+.cache/
+

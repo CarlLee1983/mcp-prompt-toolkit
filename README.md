@@ -4,7 +4,7 @@
 
 **Prompt repository governance toolkit for MCP**
 
-[![Version](https://img.shields.io/badge/version-0.3.1-blue.svg)](https://github.com/CarlLee1983/prompts-tooling-sdk)
+[![Version](https://img.shields.io/badge/version-0.4.0-blue.svg)](https://github.com/CarlLee1983/prompts-tooling-sdk)
 [![License](https://img.shields.io/badge/license-ISC-green.svg)](LICENSE)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.4+-blue.svg)](https://www.typescriptlang.org/)
 [![Node](https://img.shields.io/badge/Node.js-18+-green.svg)](https://nodejs.org/)
@@ -26,7 +26,7 @@
 - **Schema Validation**: Zod-based schema validation for robust type checking
 - **Code Quality**: ESLint configuration with automatic formatting
 - **Git Hooks**: Pre-commit hook for automatic lint fixes
-- **Comprehensive Testing**: 82 unit tests with comprehensive coverage
+- **Comprehensive Testing**: 88 unit tests with comprehensive coverage
 
 ## 🚀 Installation
 
@@ -473,7 +473,44 @@ CarlLee1983
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
+Please read our [Contributing Guide](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
+
+- 📖 [Contributing Guide](CONTRIBUTING.md)
+- 📋 [Code of Conduct](CODE_OF_CONDUCT.md)
+- 🔒 [Security Policy](SECURITY.md)
+
 ## 📝 Changelog
+
+### [0.4.0] - Error Code & Severity System
+
+#### Added
+- Comprehensive error code system with standardized error codes
+- Four-level severity system: fatal, error, warning, info
+- Error code categories: REGISTRY, PROMPT, PARTIAL, REPO, FILE, CLI
+- `hint` field in error objects for helpful resolution guidance
+- `meta` field in error objects for additional error metadata
+- Summary statistics in `validatePromptRepo` result (fatal, error, warning, info counts)
+- CLI `--severity` option for filtering errors by minimum severity level
+- Fatal error handling that always causes CLI to exit with code 1
+- Enhanced error formatting with color-coded severity levels (fatal uses red background)
+- Error code constants (`ERROR_CODE_CONSTANTS`) for type safety
+
+#### Changed
+- **BREAKING**: `Severity` type changed from `'error' | 'warning' | 'info' | 'debug'` to `'fatal' | 'error' | 'warning' | 'info'`
+- **BREAKING**: `ToolkitError` interface: `details` field renamed to `meta`, added `hint` field
+- **BREAKING**: `validatePromptRepo` return type now includes `summary` field
+- Error codes renamed for consistency:
+  - `PARTIAL_MISSING` → `PARTIAL_NOT_FOUND`
+  - `PARTIAL_CIRCULAR` → `PARTIAL_CIRCULAR_DEPENDENCY`
+  - `PARTIALS_FOLDER_NOT_FOUND` → `PARTIAL_PATH_INVALID`
+- All validators now return `ToolkitError[]` instead of throwing ZodError
+- `loadYaml` now throws `ToolkitError` instead of raw errors
+- CLI commands updated to support new severity system
+
+#### Fixed
+- Improved error handling in file operations
+- Better error messages with contextual hints
+- Consistent error structure across all validators
 
 ### [0.3.1] - CI/CD Enhancement
 
