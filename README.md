@@ -4,7 +4,7 @@
 
 **Prompt repository governance toolkit for MCP**
 
-[![Version](https://img.shields.io/badge/version-0.3.0-blue.svg)](https://github.com/CarlLee1983/prompts-tooling-sdk)
+[![Version](https://img.shields.io/badge/version-0.3.1-blue.svg)](https://github.com/CarlLee1983/prompts-tooling-sdk)
 [![License](https://img.shields.io/badge/license-ISC-green.svg)](LICENSE)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.4+-blue.svg)](https://www.typescriptlang.org/)
 [![Node](https://img.shields.io/badge/Node.js-18+-green.svg)](https://nodejs.org/)
@@ -375,6 +375,13 @@ CarlLee1983
 Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## 📝 Changelog
+
+### [0.3.1] - CI/CD Enhancement
+
+- Add GitHub Actions CI workflow
+- Automate lint, test, and build checks
+- Improve development workflow reliability
+- Ensure code quality before merge
 
 ### [0.3.0] - CLI Tool Release
 

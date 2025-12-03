@@ -4,7 +4,7 @@
 
 **適用於 MCP 的提示倉庫治理工具集**
 
-[![Version](https://img.shields.io/badge/version-0.3.0-blue.svg)](https://github.com/CarlLee1983/prompts-tooling-sdk)
+[![Version](https://img.shields.io/badge/version-0.3.1-blue.svg)](https://github.com/CarlLee1983/prompts-tooling-sdk)
 [![License](https://img.shields.io/badge/license-ISC-green.svg)](LICENSE)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.4+-blue.svg)](https://www.typescriptlang.org/)
 [![Node](https://img.shields.io/badge/Node.js-18+-green.svg)](https://nodejs.org/)
@@ -375,6 +375,13 @@ CarlLee1983
 歡迎任何形式的貢獻！請隨時提交 Pull Request。
 
 ## 📝 更新日誌
+
+### [0.3.1] - CI/CD 增強
+
+- 新增 GitHub Actions CI workflow
+- 自動化 lint、test 和 build 檢查
+- 改善開發流程可靠性
+- 確保合併前程式碼品質
 
 ### [0.3.0] - CLI 工具發佈
 

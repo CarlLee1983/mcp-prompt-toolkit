@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ 拉原始碼
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2️⃣ 設定 Node.js（你套件需求 Node 18+）
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      # 3️⃣ 安裝 pnpm
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9
+
+      # 4️⃣ 安裝依賴
+      - name: Install dependencies
+        run: pnpm install
+
+      # 5️⃣ Lint
+      - name: Lint
+        run: pnpm lint
+
+      # 6️⃣ 單元測試（你現在有 82 tests）
+      - name: Test
+        run: pnpm test:run
+
+      # 7️⃣ Build（ts → dist）
+      - name: Build
+        run: pnpm build
