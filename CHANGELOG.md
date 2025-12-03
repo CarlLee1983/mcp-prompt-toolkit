@@ -7,6 +7,22 @@ and this project is licensed under [ISC](LICENSE).
 
 ## [Unreleased]
 
+## [0.4.2] - 2025-12-03
+
+### Changed
+- **Dependencies Updated**: Updated all dependencies to latest versions
+  - `@types/node`: 20.19.25 → 24.10.1
+  - `glob`: 10.5.0 → 13.0.0
+  - `chalk`: 4.1.2 → 5.6.2
+  - `ora`: 5.4.1 → 9.0.0
+  - `zod`: 3.25.76 → 4.1.13
+  - `vitest`: 1.6.1 → 4.0.15
+
+### Notes
+- All major version updates have been tested and verified
+- No breaking changes detected in functionality
+- All tests pass with updated dependencies
+
 ## [0.4.1] - 2025-12-03
 
 ### Added
