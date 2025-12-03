@@ -1,6 +1,6 @@
 {
   "name": "@carllee1983/prompt-toolkit",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Prompt repository governance toolkit for MCP",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
