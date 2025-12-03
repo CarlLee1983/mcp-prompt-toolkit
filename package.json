@@ -1,15 +1,20 @@
 {
   "name": "@carllee1983/prompt-toolkit",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Prompt repository governance toolkit for MCP",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "bin": {
+    "prompt-toolkit": "./dist/cli/index.js",
+    "prompt-toolkit-cli": "./dist/cli/index.js"
+  },
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "tsup src/index.ts --dts",
+    "build": "tsup src/index.ts --dts && tsup src/cli/index.ts --dts --format cjs --outDir dist/cli",
     "dev": "tsup src/index.ts --dts --watch",
+    "cli": "tsx src/cli/index.ts",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "test": "vitest",
@@ -34,13 +39,17 @@
     "eslint": "^9.39.1",
     "husky": "^9.1.7",
     "tsup": "^8.0.0",
+    "tsx": "^4.21.0",
     "typescript": "^5.4.0",
     "typescript-eslint": "^8.48.1",
     "vitest": "^1.5.0"
   },
   "dependencies": {
+    "chalk": "^4.1.2",
+    "commander": "^14.0.2",
     "glob": "^10.3.0",
     "js-yaml": "^4.1.0",
+    "ora": "^5.4.1",
     "zod": "^3.23.0"
   }
 }

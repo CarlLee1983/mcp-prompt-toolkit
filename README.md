@@ -4,7 +4,7 @@
 
 **Prompt repository governance toolkit for MCP**
 
-[![Version](https://img.shields.io/badge/version-0.2.0-blue.svg)](https://github.com/CarlLee1983/prompts-tooling-sdk)
+[![Version](https://img.shields.io/badge/version-0.3.0-blue.svg)](https://github.com/CarlLee1983/prompts-tooling-sdk)
 [![License](https://img.shields.io/badge/license-ISC-green.svg)](LICENSE)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.4+-blue.svg)](https://www.typescriptlang.org/)
 [![Node](https://img.shields.io/badge/Node.js-18+-green.svg)](https://nodejs.org/)
@@ -42,6 +42,83 @@ yarn add @carllee1983/prompt-toolkit
 ```
 
 ## 📖 Usage
+
+### CLI Usage
+
+The package includes a CLI tool for validating and managing prompt repositories from the command line.
+
+#### Installation
+
+After installing the package, the CLI is available as `prompt-toolkit`:
+
+```bash
+# Using npx (no installation needed)
+npx @carllee1983/prompt-toolkit --help
+
+# Or install globally
+npm install -g @carllee1983/prompt-toolkit
+prompt-toolkit --help
+```
+
+#### CLI Commands
+
+**Validate Commands:**
+```bash
+# Validate entire repository
+prompt-toolkit validate repo [path]
+
+# Validate registry.yaml
+prompt-toolkit validate registry [path] --repo-root <path>
+
+# Validate a single prompt file
+prompt-toolkit validate file <file-path>
+
+# Validate partials directory
+prompt-toolkit validate partials [path] --partials-path <path>
+```
+
+**Check Commands:**
+```bash
+# Check partials usage (missing partials and circular dependencies)
+prompt-toolkit check partials [path]
+```
+
+**List Commands:**
+```bash
+# List all prompts
+prompt-toolkit list prompts [path] [--group <name>] [--enabled-only]
+
+# List all groups
+prompt-toolkit list groups [path] [--enabled-only]
+```
+
+**Statistics:**
+```bash
+# Show repository statistics
+prompt-toolkit stats [path]
+```
+
+**Output Options:**
+- `--format <json|text>` - Output format (default: text)
+- `--output <file>` - Write output to file
+- `--exit-code` - Exit with non-zero code on validation failure
+
+**Examples:**
+```bash
+# Validate repository with JSON output
+prompt-toolkit validate repo --format json
+
+# Check partials and save results to file
+prompt-toolkit check partials --format json --output results.json
+
+# List all enabled prompts
+prompt-toolkit list prompts --enabled-only
+
+# Show statistics in JSON format
+prompt-toolkit stats --format json
+```
+
+### Programmatic Usage
 
 ### Basic Example
 
@@ -299,6 +376,18 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## 📝 Changelog
 
+### [0.3.0] - CLI Tool Release
+
+- Added comprehensive CLI tool with command-line interface
+- Implemented validate commands (repo, registry, file, partials)
+- Implemented check commands (partials usage)
+- Implemented list commands (prompts, groups)
+- Implemented stats command for repository statistics
+- Support for both text and JSON output formats
+- Colorful terminal output with loading animations
+- Support for output to file and exit code control
+- Added CLI documentation and usage examples
+
 ### [0.2.0] - Code Quality & Partials Enhancement
 
 - Added ESLint configuration with TypeScript support
@@ -307,6 +396,8 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 - Enhanced repository validation with partials usage checking
 - Improved type safety with explicit error types
 - Added comprehensive unit tests for partials functionality (82 total tests)
+- Added CLI tool with validate, check, list, and stats commands
+- Support for both text and JSON output formats
 - Updated package name to `@carllee1983/prompt-toolkit`
 
 ### [0.1.0] - Initial Release

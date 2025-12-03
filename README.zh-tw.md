@@ -4,7 +4,7 @@
 
 **適用於 MCP 的提示倉庫治理工具集**
 
-[![Version](https://img.shields.io/badge/version-0.2.0-blue.svg)](https://github.com/CarlLee1983/prompts-tooling-sdk)
+[![Version](https://img.shields.io/badge/version-0.3.0-blue.svg)](https://github.com/CarlLee1983/prompts-tooling-sdk)
 [![License](https://img.shields.io/badge/license-ISC-green.svg)](LICENSE)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.4+-blue.svg)](https://www.typescriptlang.org/)
 [![Node](https://img.shields.io/badge/Node.js-18+-green.svg)](https://nodejs.org/)
@@ -42,6 +42,83 @@ yarn add @carllee1983/prompt-toolkit
 ```
 
 ## 📖 使用方式
+
+### CLI 使用方式
+
+此套件包含一個 CLI 工具，可從命令列驗證與管理提示倉庫。
+
+#### 安裝
+
+安裝套件後，CLI 可透過 `prompt-toolkit` 命令使用：
+
+```bash
+# 使用 npx（無需安裝）
+npx @carllee1983/prompt-toolkit --help
+
+# 或全域安裝
+npm install -g @carllee1983/prompt-toolkit
+prompt-toolkit --help
+```
+
+#### CLI 命令
+
+**驗證命令：**
+```bash
+# 驗證整個倉庫
+prompt-toolkit validate repo [path]
+
+# 驗證 registry.yaml
+prompt-toolkit validate registry [path] --repo-root <path>
+
+# 驗證單一提示檔
+prompt-toolkit validate file <file-path>
+
+# 驗證 partials 目錄
+prompt-toolkit validate partials [path] --partials-path <path>
+```
+
+**檢查命令：**
+```bash
+# 檢查 partials 使用情況（缺少的 partials 與循環相依）
+prompt-toolkit check partials [path]
+```
+
+**列表命令：**
+```bash
+# 列出所有 prompts
+prompt-toolkit list prompts [path] [--group <name>] [--enabled-only]
+
+# 列出所有 groups
+prompt-toolkit list groups [path] [--enabled-only]
+```
+
+**統計資訊：**
+```bash
+# 顯示倉庫統計資訊
+prompt-toolkit stats [path]
+```
+
+**輸出選項：**
+- `--format <json|text>` - 輸出格式（預設：text）
+- `--output <file>` - 將輸出寫入檔案
+- `--exit-code` - 驗證失敗時以非零退出碼退出
+
+**範例：**
+```bash
+# 以 JSON 格式驗證倉庫
+prompt-toolkit validate repo --format json
+
+# 檢查 partials 並將結果儲存到檔案
+prompt-toolkit check partials --format json --output results.json
+
+# 列出所有啟用的 prompts
+prompt-toolkit list prompts --enabled-only
+
+# 以 JSON 格式顯示統計資訊
+prompt-toolkit stats --format json
+```
+
+### 程式化使用方式
 
 ### 基本範例
 
@@ -299,6 +376,18 @@ CarlLee1983
 
 ## 📝 更新日誌
 
+### [0.3.0] - CLI 工具發佈
+
+- 新增完整的 CLI 工具，提供命令列介面
+- 實作驗證命令（repo, registry, file, partials）
+- 實作檢查命令（partials 使用情況）
+- 實作列表命令（prompts, groups）
+- 實作統計命令，顯示倉庫統計資訊
+- 支援文字和 JSON 兩種輸出格式
+- 彩色終端機輸出與載入動畫
+- 支援輸出到檔案與退出碼控制
+- 新增 CLI 文件與使用範例
+
 ### [0.2.0] - 程式碼品質與 Partials 增強
 
 - 新增 ESLint 設定，支援 TypeScript
@@ -307,6 +396,8 @@ CarlLee1983
 - 增強倉庫驗證，包含 partials 使用檢查
 - 改善型別安全，使用明確的錯誤型別
 - 新增 partials 功能的完整單元測試（總計 82 個測試）
+- 新增 CLI 工具，包含 validate、check、list 和 stats 命令
+- 支援文字和 JSON 兩種輸出格式
 - 更新套件名稱為 `@carllee1983/prompt-toolkit`
 
 ### [0.1.0] - 初始版本
