@@ -1,10 +1,10 @@
-# @mcp/prompt-toolkit
+# @carllee1983/prompt-toolkit
 
 <div align="center">
 
 **適用於 MCP 的提示倉庫治理工具集**
 
-[![Version](https://img.shields.io/badge/version-0.1.0-blue.svg)](https://github.com/CarlLee1983/prompts-tooling-sdk)
+[![Version](https://img.shields.io/badge/version-0.2.0-blue.svg)](https://github.com/CarlLee1983/prompts-tooling-sdk)
 [![License](https://img.shields.io/badge/license-ISC-green.svg)](LICENSE)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.4+-blue.svg)](https://www.typescriptlang.org/)
 [![Node](https://img.shields.io/badge/Node.js-18+-green.svg)](https://nodejs.org/)
@@ -13,29 +13,32 @@
 
 ## 📋 簡介
 
-`@mcp/prompt-toolkit` 是一套以 TypeScript 撰寫的工具集，專為驗證與管理 Model Context Protocol (MCP) 所使用的提示倉庫而設計。它提供對 registry 檔案、提示定義與 partials 目錄的完整驗證，確保提示倉庫的完整性與正確性。
+`@carllee1983/prompt-toolkit` 是一套以 TypeScript 撰寫的工具集，專為驗證與管理 Model Context Protocol (MCP) 所使用的提示倉庫而設計。它提供對 registry 檔案、提示定義與 partials 目錄的完整驗證，確保提示倉庫的完整性與正確性。
 
 ## ✨ 特色
 
 - **Registry 驗證**：驗證 `registry.yaml` 的結構並確保所有引用的檔案存在
 - **提示檔驗證**：依據結構定義檢查單一提示 YAML 檔
 - **Partials 驗證**：驗證 partials 目錄結構與檔案存在性
+- **Partials 使用驗證**：偵測模板中缺少的 partials 與循環相依
 - **倉庫驗證**：一次性檢查所有元件的完整倉庫驗證流程
 - **型別安全**：完整的 TypeScript 型別支援
 - **結構驗證**：基於 Zod 的結構驗證，提供穩健的型別檢查
-- **完善測試**：28 個單元測試，覆蓋率 100%
+- **程式碼品質**：ESLint 設定與自動格式化
+- **Git Hooks**：Pre-commit hook 自動執行 lint 修復
+- **完善測試**：82 個單元測試，涵蓋完整功能
 
 ## 🚀 安裝
 
 ```bash
 # 使用 npm
-npm install @mcp/prompt-toolkit
+npm install @carllee1983/prompt-toolkit
 
 # 使用 pnpm
-pnpm add @mcp/prompt-toolkit
+pnpm add @carllee1983/prompt-toolkit
 
 # 使用 yarn
-yarn add @mcp/prompt-toolkit
+yarn add @carllee1983/prompt-toolkit
 ```
 
 ## 📖 使用方式
@@ -43,7 +46,7 @@ yarn add @mcp/prompt-toolkit
 ### 基本範例
 
 ```typescript
-import { validatePromptRepo } from '@mcp/prompt-toolkit'
+import { validatePromptRepo } from '@carllee1983/prompt-toolkit'
 
 // 驗證整個提示倉庫
 const result = validatePromptRepo('/path/to/prompt-repo')
@@ -58,7 +61,7 @@ if (result.passed) {
 ### 驗證 Registry
 
 ```typescript
-import { validateRegistry } from '@mcp/prompt-toolkit'
+import { validateRegistry } from '@carllee1983/prompt-toolkit'
 
 const result = validateRegistry('/path/to/registry.yaml', '/path/to/repo-root')
 
@@ -72,7 +75,7 @@ if (result.success) {
 ### 驗證提示檔
 
 ```typescript
-import { validatePromptFile } from '@mcp/prompt-toolkit'
+import { validatePromptFile } from '@carllee1983/prompt-toolkit'
 
 const result = validatePromptFile('/path/to/prompt.yaml')
 
@@ -86,7 +89,7 @@ if (result.success) {
 ### 驗證 Partials
 
 ```typescript
-import { validatePartials } from '@mcp/prompt-toolkit'
+import { validatePartials } from '@carllee1983/prompt-toolkit'
 
 // 回傳 partial 檔案路徑的陣列；若 partialPath 未設定則回傳空陣列
 const partials = validatePartials('/path/to/repo-root', 'partials')
@@ -226,7 +229,28 @@ pnpm dev
 
 # 執行 linter
 pnpm lint
+
+# 自動修復 lint 問題
+pnpm lint:fix
 ```
+
+## 🔧 程式碼品質
+
+本專案使用 ESLint 確保程式碼品質與一致性：
+
+- **ESLint 設定**：現代扁平配置格式（ESLint 9+）
+- **TypeScript 支援**：完整的 TypeScript linting，使用 `@typescript-eslint`
+- **程式碼風格**：強制不使用分號、單引號等專案規範
+- **Pre-commit Hooks**：使用 Husky 在每次 commit 前自動執行 `lint:fix`
+
+### Pre-commit Hook
+
+專案包含 pre-commit hook，會自動：
+- 在 commit 前對所有檔案執行 ESLint 修復
+- 將修復後的檔案重新加入 staging area
+- 確保 commit 前的程式碼品質
+
+當你執行 `pnpm install` 時會自動設定（透過 `prepare` script）。
 
 ## 📦 專案結構
 
@@ -238,7 +262,13 @@ prompts-tooling-sdk/
 │   │   ├── validateRepo.ts
 │   │   ├── validateRegistry.ts
 │   │   ├── validatePromptFile.ts
-│   │   └── validatePartials.ts
+│   │   ├── validatePartials.ts
+│   │   └── validatePartialsUsage.ts
+│   ├── partials/             # Partials 工具
+│   │   ├── extractPartials.ts
+│   │   ├── resolvePartialPath.ts
+│   │   ├── buildPartialGraph.ts
+│   │   └── detectCircular.ts
 │   ├── schema/               # Zod 結構定義
 │   │   ├── registry.schema.ts
 │   │   └── prompt.schema.ts
@@ -249,7 +279,9 @@ prompts-tooling-sdk/
 │       ├── loadYaml.ts
 │       └── walkDir.ts
 ├── test/                     # 測試檔案
+├── .husky/                   # Git hooks (pre-commit)
 ├── dist/                     # 建置產物
+├── eslint.config.mjs         # ESLint 設定檔
 └── package.json
 ```
 
@@ -266,6 +298,16 @@ CarlLee1983
 歡迎任何形式的貢獻！請隨時提交 Pull Request。
 
 ## 📝 更新日誌
+
+### [0.2.0] - 程式碼品質與 Partials 增強
+
+- 新增 ESLint 設定，支援 TypeScript
+- 新增 Husky pre-commit hooks，自動執行 lint 修復
+- 新增 partials 使用驗證（偵測缺少的 partials 與循環相依）
+- 增強倉庫驗證，包含 partials 使用檢查
+- 改善型別安全，使用明確的錯誤型別
+- 新增 partials 功能的完整單元測試（總計 82 個測試）
+- 更新套件名稱為 `@carllee1983/prompt-toolkit`
 
 ### [0.1.0] - 初始版本
 

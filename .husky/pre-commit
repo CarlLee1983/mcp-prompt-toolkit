@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Run lint fix on all files
+echo "Running ESLint fix before commit..."
+pnpm lint:fix
+
+# Add the fixed files back to staging
+git add -u
+
+echo "✅ Lint fix completed!"

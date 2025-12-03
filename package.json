@@ -1,31 +1,46 @@
 {
-    "name": "@carllee1983/prompt-toolkit",
-    "version": "0.1.0",
-    "description": "Prompt repository governance toolkit for MCP",
-    "main": "dist/index.js",
-    "types": "dist/index.d.ts",
-    "files": ["dist"],
-    "scripts": {
-      "build": "tsup src/index.ts --dts",
-      "dev": "tsup src/index.ts --dts --watch",
-      "lint": "eslint .",
-      "test": "vitest",
-      "test:coverage": "vitest --coverage",
-      "test:run": "vitest run"
-    },
-    "keywords": ["mcp", "prompt", "toolkit", "ai", "governance"],
-    "author": "CarlLee1983",
-    "license": "ISC",
-    "devDependencies": {
-      "@types/node": "^20.0.0",
-      "tsup": "^8.0.0",
-      "typescript": "^5.4.0",
-      "vitest": "^1.5.0"
-    },
-    "dependencies": {
-      "zod": "^3.23.0",
-      "js-yaml": "^4.1.0",
-      "glob": "^10.3.0"
-    }
+  "name": "@carllee1983/prompt-toolkit",
+  "version": "0.2.0",
+  "description": "Prompt repository governance toolkit for MCP",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --dts",
+    "dev": "tsup src/index.ts --dts --watch",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test": "vitest",
+    "test:coverage": "vitest --coverage",
+    "test:run": "vitest run",
+    "prepare": "husky"
+  },
+  "keywords": [
+    "mcp",
+    "prompt",
+    "toolkit",
+    "ai",
+    "governance"
+  ],
+  "author": "CarlLee1983",
+  "license": "ISC",
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@types/node": "^20.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.48.1",
+    "@typescript-eslint/parser": "^8.48.1",
+    "eslint": "^9.39.1",
+    "husky": "^9.1.7",
+    "tsup": "^8.0.0",
+    "typescript": "^5.4.0",
+    "typescript-eslint": "^8.48.1",
+    "vitest": "^1.5.0"
+  },
+  "dependencies": {
+    "glob": "^10.3.0",
+    "js-yaml": "^4.1.0",
+    "zod": "^3.23.0"
   }
-  
+}

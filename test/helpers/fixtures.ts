@@ -82,3 +82,30 @@ groups:
     # Missing closing bracket
 `
 
+export const promptYamlWithPartials = `
+id: test-prompt-with-partials
+title: Test Prompt with Partials
+description: This is a test prompt with partials
+args:
+  name:
+    type: string
+    description: The name parameter
+    required: true
+template: |
+  {{> role-expert}}
+  Hello {{name}}
+  {{> role-helper}}
+`
+
+export const promptYamlWithMissingPartial = `
+id: test-prompt-missing-partial
+title: Test Prompt Missing Partial
+description: This prompt references a missing partial
+args:
+  name:
+    type: string
+template: |
+  {{> role-expert}}
+  {{> missing-partial}}
+`
+
