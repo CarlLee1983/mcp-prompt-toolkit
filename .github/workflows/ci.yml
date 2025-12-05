@@ -19,7 +19,7 @@ jobs:
 
       # 2️⃣ Install pnpm (must be before Node.js setup)
       - name: Install pnpm
-        uses: pnpm/action-setup@v3
+        uses: pnpm/action-setup@v4
         id: pnpm-install
         with:
           version: 9
